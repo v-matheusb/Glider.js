@@ -343,13 +343,6 @@
       })
       slideClasses.toggle('active', _.slide === index)
 
-      if (isVisible && index === _.slide && _.lastEmittedActiveSlide !== _.slide) {
-          _.emit('slide-active', {
-              slide: index
-          })
-          _.lastEmittedActiveSlide = index
-      }
-
       if (middle === index || (extraMiddle && extraMiddle === index)) {
         slideClasses.add('center')
       } else {
@@ -366,12 +359,14 @@
         Math.ceil(itemStart) >= Math.floor(start) &&
         Math.floor(itemEnd) <= Math.ceil(end)
       slideClasses.toggle('visible', isVisible)
+      
       if (isVisible && index === _.slide && _.lastEmittedActiveSlide !== _.slide) {
         _.emit('slide-active', {
             slide: index
           })
         _.lastEmittedActiveSlide = index
       }
+
       if (isVisible !== wasVisible) {
         _.emit('slide-' + (isVisible ? 'visible' : 'hidden'), {
           slide: index
